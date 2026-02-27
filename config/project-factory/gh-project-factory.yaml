@@ -38,7 +38,7 @@ service_accounts:
       - roles/editor
       - roles/storage.objectViewer
 ad_groups:
-  - name: gcp-developers
+  - name: gcp-developers@intuitive.cloud
     iam_roles:
       - roles/iam.roleViewer
       - roles/compute.networkViewer
@@ -48,7 +48,7 @@ ad_groups:
       - roles/iam.workloadIdentityPoolViewer
       - roles/resourcemanager.folderViewer
       - roles/logging.viewer
-  - name: itp-gcp-landing-zone
+  - name: itp-gcp-landing-zone@intuitive.cloud
     iam_roles:
       - roles/bigquery.user
       - roles/bigquery.dataEditor
@@ -64,7 +64,7 @@ ad_groups:
       - roles/cloudscheduler.jobRunner
       - roles/biglake.editor
       - roles/logging.viewer
-  - name: itp-gcp-landing-zone-admins
+  - name: itp-gcp-landing-zone-admins@intuitive.cloud
     iam_roles:
       - roles/aiplatform.expressUser
       - roles/run.developer
