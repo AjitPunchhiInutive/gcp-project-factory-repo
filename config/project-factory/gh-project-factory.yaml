@@ -2,11 +2,11 @@ deploy: true
 project_name: sq-dev-test-prj-demo1
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
-  business_units: cloud-engineering
+  business-unit: cloud-engineering
   cost-center: C11190
   environment: dev
   application: udp
-  primary_owner: ajit.punchhi@intuitive.ai
+  primary_owner: "Ajit Punchhi"
 deletion_policy: PREVENT
 auto_create_network: false
 parent: folders/1048391613319
