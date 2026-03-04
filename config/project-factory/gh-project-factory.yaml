@@ -6,7 +6,7 @@ labels:
   cost-center: C11190
   environment: dev
   application: udp
-  primary_owner: "Ajit Punchhi"
+  primary_owner: ajit-punchhi
 deletion_policy: PREVENT
 auto_create_network: false
 parent: folders/1048391613319
