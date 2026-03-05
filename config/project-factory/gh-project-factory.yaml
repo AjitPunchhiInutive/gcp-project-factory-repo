@@ -29,11 +29,12 @@ services:
   - bigquery.googleapis.com
   - dataflow.googleapis.com
   - cloudfunctions.googleapis.com
+    disable_dependent_services=true
 # policy_boolean:
 #   constraints/compute.skipDefaultNetworkCreation: true
 service_config:
   disable_on_destroy: true
-  disable_dependent_services: false
+  disable_dependent_services: true
 service_accounts:
   - create: true
     name: sq-dev-test-prj-demo1
