@@ -1,5 +1,5 @@
 deploy: true
-project_name: sw-dev-test-prj-demo1
+project_name: sw-dev-test-prj-demo-1
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
   business-unit: cloud-engineering
@@ -7,7 +7,7 @@ labels:
   environment: dev
   application: udp
   primary_owner: ajit-punchhi
-deletion_policy: PREVENT
+deletion_policy: DELETE
 auto_create_network: false
 parent: folders/1048391613319
 services:
@@ -35,6 +35,31 @@ services:
 service_config:
   disable_on_destroy: true
   disable_dependent_services: true
+service_accounts:
+  - create: true
+    name: sw-dev-test-sa-dataflow
+    iam_roles:
+      - roles/dataflow.worker
+      - roles/storage.objectViewer
+      - roles/bigquery.dataEditor
+  - create: true
+    name: sw-dev-test-sa-composer
+    iam_roles:
+      - roles/composer.worker
+      - roles/storage.objectAdmin
+      - roles/bigquery.dataEditor
+  - create: true
+    name: sw-dev-test-sa-bigquery
+    iam_roles:
+      - roles/bigquery.dataEditor
+      - roles/bigquery.jobUser
+      - roles/storage.objectViewer
+  - create: true
+    name: sw-dev-test-sa-cloudrun
+    iam_roles:
+      - roles/run.invoker
+      - roles/secretmanager.secretAccessor
+      - roles/storage.objectViewer
 ad_groups:
   - name: gcp-developers@intuitive.cloud
     iam_roles:
