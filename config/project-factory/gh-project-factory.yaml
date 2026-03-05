@@ -35,12 +35,6 @@ services:
 service_config:
   disable_on_destroy: true
   disable_dependent_services: true
-service_accounts:
-  - create: true
-    name: sq-dev-test-prj-demo1
-    iam_roles:
-      - roles/editor
-      - roles/storage.objectViewer
 ad_groups:
   - name: gcp-developers@intuitive.cloud
     iam_roles:
