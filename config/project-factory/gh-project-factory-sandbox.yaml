@@ -7,7 +7,7 @@ labels:
   environment: dev
   application: udp
   primary_owner: ajit-punchhi
-deletion_policy: DELETE
+deletion_policy: PREVENT
 auto_create_network: false
 parent: folders/749575608107
 services:
