@@ -1,0 +1,88 @@
+deploy: true
+project_name: sw-dev-test-prj-secrets
+billing_account: '01C2E5-FEB537-9135D0'
+labels:
+  business-unit: cloud-engineering
+  cost-center: C11190
+  environment: dev
+  application: udp
+  primary_owner: ajit-punchhi
+deletion_policy: DELETE
+auto_create_network: false
+parent: folders/749575608107
+services:
+  - servicemanagement.googleapis.com       
+  - billingbudgets.googleapis.com
+  - cloudbilling.googleapis.com
+  - cloudresourcemanager.googleapis.com
+  - iam.googleapis.com
+  - iamcredentials.googleapis.com
+  - serviceusage.googleapis.com
+  - compute.googleapis.com
+  - cloudresourcemanager.googleapis.com
+  - composer.googleapis.com
+  - composer.googleapis.com
+  - monitoring.googleapis.com
+  - secretmanager.googleapis.com
+  - storage.googleapis.com
+  - run.googleapis.com
+  - bigquery.googleapis.com
+  - dataflow.googleapis.com
+  - cloudfunctions.googleapis.com
+# policy_boolean:
+#   constraints/compute.skipDefaultNetworkCreation: true
+service_config:
+  disable_on_destroy: true
+  disable_dependent_services: true
+service_accounts:
+  - create: true
+    name: sq-dev-test-prj-demo1
+    iam_roles:
+      - roles/editor
+      - roles/storage.objectViewer
+ad_groups:
+  - name: gcp-developers@intuitive.cloud
+    iam_roles:
+      - roles/iam.roleViewer
+      - roles/compute.networkViewer
+      - roles/analyticshub.viewer
+      - roles/dataflow.viewer
+      - roles/datastream.viewer
+      - roles/iam.workloadIdentityPoolViewer
+      - roles/logging.viewer
+  - name: itp-gcp-landing-zone@intuitive.cloud
+    iam_roles:
+      - roles/bigquery.user
+      - roles/bigquery.dataEditor
+      - roles/analyticshub.publisher
+      - roles/storage.objectUser
+      - roles/dataflow.developer
+      - roles/datastream.admin
+      - roles/composer.user
+      - roles/dataplex.catalogEditor
+      - roles/pubsub.editor
+      - roles/artifactregistry.attachmentReader
+      - roles/artifactregistry.attachmentWriter
+      - roles/cloudscheduler.jobRunner
+      - roles/biglake.editor
+      - roles/logging.viewer
+  - name: itp-gcp-landing-zone-admins@intuitive.cloud
+    iam_roles:
+      - roles/aiplatform.expressUser
+      - roles/run.developer
+      - roles/bigquery.user
+      - roles/bigquery.dataEditor
+      - roles/storage.objectUser
+      - roles/artifactregistry.attachmentReader
+      - roles/artifactregistry.attachmentWriter
+      - roles/logging.viewer
+budget:
+  amount: '2000'
+  threshold_rules:
+    - 0.7
+    - 1.0
+  types:
+    - type: email
+      send_notifications_to:
+        - test@intuitive.ai
+        - demo@intuitive.ai
