@@ -1,0 +1,28 @@
+deploy: true
+project_id: sw-dev-test-prj-itp
+region: us
+# secret_manager_project_id: sw-secrets-project
+
+service_accounts:
+
+  # ── Platform / Infrastructure ─────────────────────────────────────────────
+  - account_id: sa-terraform-runner
+    display_name: Terraform Runner SA
+    description: Runs Terraform plans and applies in CI/CD automation
+    deploy: true
+    roles:
+      - roles/editor
+      - roles/iam.securityAdmin
+      - roles/resourcemanager.projectIamAdmin
+    secret_id: terraform-runner-sa-key
+
+  - account_id: sa-ci-deployer
+    display_name: CI Deployer SA
+    description: Used by CI pipeline to deploy Cloud Run and GCS resources
+    deploy: true
+    roles:
+      - roles/run.admin
+      - roles/storage.objectAdmin
+      - roles/iam.serviceAccountUser
+      - roles/artifactregistry.writer
+    secret_id: ci-deployer-sa-key

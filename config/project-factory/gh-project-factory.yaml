@@ -35,7 +35,7 @@ service_config:
   disable_on_destroy: true
   disable_dependent_services: true
 service_accounts:
-  - create: true
+  - create: false
     name: sw-dev-test-prj-prod
     iam_roles:
       - roles/editor

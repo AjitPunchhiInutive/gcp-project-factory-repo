@@ -1,4 +1,4 @@
-deploy: true
+deploy: false
 project_name: sw-dev-test-prj-itp
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
