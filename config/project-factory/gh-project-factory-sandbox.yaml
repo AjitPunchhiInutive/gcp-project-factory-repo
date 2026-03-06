@@ -9,7 +9,7 @@ labels:
   primary_owner: ajit-punchhi
 deletion_policy: PREVENT
 auto_create_network: false
-parent: folders/749575608107
+parent: folders/530179965844
 services:
   - servicemanagement.googleapis.com       
   - billingbudgets.googleapis.com
@@ -36,7 +36,7 @@ service_config:
   disable_dependent_services: true
 service_accounts:
   - create: true
-    name: sq-dev-test-prj-demo1
+    name: sq-dev-test-prj-itp
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
