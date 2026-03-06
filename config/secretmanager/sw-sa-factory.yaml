@@ -6,7 +6,7 @@ region: us
 service_accounts:
 
   # ── Platform / Infrastructure ─────────────────────────────────────────────
-  - account_id: sa-terraform-runner
+  - account_id: sa-terraform-runner-demo
     display_name: Terraform Runner SA
     description: Runs Terraform plans and applies in CI/CD automation
     deploy: true
