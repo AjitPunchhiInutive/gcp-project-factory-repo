@@ -5,7 +5,7 @@ locals {
 
   
   secret_config_files = fileset("config/secretmanager", "*.yaml")
-  secrets     = { for f in local.secret_config_files : trimsuffix(f, ".yaml") => yamldecode(file("config/secretmanager/${f}"))["secrets"] }
+  secrets     = { for f in local.secret_config_files : trimsuffix(f, ".yaml") => yamldecode(file("config/secretmanager/${f}")) }
 
 # sa_config_files = fileset("config/serviceaccount", "*.yaml")
   # sa_objects      = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
