@@ -1,5 +1,5 @@
 deploy: true
-project_name: sw-dev-test-prj-secrets
+project_name: sw-dev-test-prj-tip-secrets
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
   business-unit: cloud-engineering
@@ -36,7 +36,7 @@ service_config:
   disable_dependent_services: true
 service_accounts:
   - create: true
-    name: sq-dev-test-prj-itp
+    name: sq-dev-test-prj-itp-secrets
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
