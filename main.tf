@@ -25,5 +25,5 @@ module "project-factory" {
 module "secret-manager" {
   source   = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//secretmanager?ref=main"
   for_each = local.secrets
-  secrets  = each.value
+
 }
