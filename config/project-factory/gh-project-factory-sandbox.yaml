@@ -1,15 +1,15 @@
 deploy: true
-project_name: sw-dev-test-prj-prod
-billing_account: '01C2E5-FEB537-9135D0'
+project_name: sw-dev-test-prj-tip-secrets
+billing_account: ''
 labels:
   business-unit: cloud-engineering
   cost-center: C11190
   environment: dev
   application: udp
   primary_owner: ajit-punchhi
-deletion_policy: PREVENT
+deletion_policy: DELETE
 auto_create_network: false
-parent: folders/1037539177557
+parent: folders/530179965844
 services:
   - servicemanagement.googleapis.com       
   - billingbudgets.googleapis.com
@@ -35,8 +35,8 @@ service_config:
   disable_on_destroy: true
   disable_dependent_services: true
 service_accounts:
-  - create: false
-    name: sw-dev-test-prj-prod
+  - create: true
+    name: sq-dev-test-prj-itp-secrets
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer

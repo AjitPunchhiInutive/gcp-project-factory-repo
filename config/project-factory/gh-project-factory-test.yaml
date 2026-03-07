@@ -1,5 +1,5 @@
 deploy: true
-project_name: sw-dev-test-prj-prod
+project_name: sw-dev-test-prj-itp
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
   business-unit: cloud-engineering
@@ -9,7 +9,7 @@ labels:
   primary_owner: ajit-punchhi
 deletion_policy: PREVENT
 auto_create_network: false
-parent: folders/1037539177557
+parent: folders/596959692084
 services:
   - servicemanagement.googleapis.com       
   - billingbudgets.googleapis.com
@@ -33,10 +33,15 @@ services:
 #   constraints/compute.skipDefaultNetworkCreation: true
 service_config:
   disable_on_destroy: true
-  disable_dependent_services: true
+  disable_dependent_services: false
 service_accounts:
-  - create: false
-    name: sw-dev-test-prj-prod
+  - create: true
+    name: sq-dev-test-prj-project
+    iam_roles:
+      - roles/editor
+      - roles/storage.objectViewer
+  - create: true
+    name: sq-dev-test-prj-test
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
