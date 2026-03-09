@@ -9,7 +9,7 @@ bootstrap layer sets up the GCP organization-level primitives required before an
 
 ---
 
-## Prerequisitesllll
+## Prerequisites
 
 - **Terraform** >= 1.6.3
 - **GCP Project** with billing enabled
