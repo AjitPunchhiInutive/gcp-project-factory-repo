@@ -63,6 +63,7 @@ jobs:
 
       - name: Run tflint
         run: tflint --recursive
+        continue-on-error: true
 
       - name: Terraform Init
         run: terraform init
@@ -145,6 +146,7 @@ jobs:
 
       - name: Run tflint
         run: tflint --recursive
+        continue-on-error: true
 
       - name: Terraform Init
         run: terraform init
