@@ -1,5 +1,5 @@
-deploy: false
-project_name: sw-dev-test-prj-tip-secrets
+deploy: true
+project_name: sw-dev-test-prj-itp-secrets
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
   business-unit: cloud-engineering
@@ -9,7 +9,7 @@ labels:
   primary_owner: ajit-punchhi
 deletion_policy: DELETE
 auto_create_network: false
-parent: folders/530179965844
+parent: folders/107298344544
 services:
   - servicemanagement.googleapis.com       
   - billingbudgets.googleapis.com
