@@ -1,5 +1,5 @@
 deploy: true
-secret_id: service-account-key
+secret_id: service-account
 project_id: sw-dev-test-prj-itp-secrets
 
 labels:
