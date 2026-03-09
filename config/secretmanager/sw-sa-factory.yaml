@@ -17,7 +17,6 @@ kms_key_name: null
 
 rotation_period: "2592000s"
 next_rotation_time: "2025-06-01T00:00:00Z"
-topics: []
 
 ttl: null
 
