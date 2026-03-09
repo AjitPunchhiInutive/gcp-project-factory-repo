@@ -1,24 +1,17 @@
 locals {
 
-  # ─── Project Factory ──────────────────────────────────────────────────────
   project_config_files = fileset("config/project-factory", "*.yaml")
   project_objects      = [for f in local.project_config_files : yamldecode(file("config/project-factory/${f}"))]
 
-  # ─── Secret Manager ───────────────────────────────────────────────────────
-  # Decode each YAML file — filename (without .yaml) becomes the map key
   secret_config_files = fileset("config/secretmanager", "*.yaml")
-
-  # FIX: Include ALL fields from var.secrets type (versions + iam_bindings were missing)
-  # Pass the full decoded object so it satisfies map(object({...})) in var.secrets
   secrets = {
     for f in local.secret_config_files :
     trimsuffix(f, ".yaml") => yamldecode(file("config/secretmanager/${f}"))
     if yamldecode(file("config/secretmanager/${f}")).deploy == true
   }
 
-  # ─── Service Accounts ─────────────────────────────────────────────────────
-  sa_config_files      = fileset("config/serviceaccount", "*.yaml")
-  sa_objects           = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
+  sa_config_files      = fileset("config/sa", "*.yaml")
+  sa_objects           = [for f in local.sa_config_files : yamldecode(file("config/sa/${f}"))]
   all_service_accounts = flatten([for obj in local.sa_objects : obj.service_accounts])
   sa_map               = { for sa in local.all_service_accounts : sa.account_id => sa if sa.deploy == true }
 
@@ -41,11 +34,11 @@ module "project-factory" {
   project_objects = local.project_objects
 }
 
-# module "serviceaccount" {
-#   source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//serviceaccount?ref=main"
-#   project_objects = local.project_objects
-#   sa_objects      = local.sa_objects
-# }
+module "serviceaccount" {
+  source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//service-account?ref=main"
+  project_objects = local.project_objects
+  sa_objects      = local.sa_objects
+}
 
 module "secretmanager" {
   source  = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//secretmanager?ref=main"
