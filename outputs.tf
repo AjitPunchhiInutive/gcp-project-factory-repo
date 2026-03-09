@@ -6,8 +6,8 @@ output "project-factory" {
 }
 
 
-output "secretmanager" {
-    description = "Project "
-    value = module.secretmanager
+# output "secretmanager" {
+#     description = "Project "
+#     value = module.secretmanager
   
-}
+# }
