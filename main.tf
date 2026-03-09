@@ -5,7 +5,7 @@ locals {
 
   
   secret_config_files = fileset("config/secretmanager", "*.yaml")
-  secrets     = { for f in local.secret_config_files : trimsuffix(f, ".yaml") => yamldecode(file("config/secretmanager/${f}")) }
+  secrets_raw         = { for f in local.secret_config_files : trimsuffix(f, ".yaml") => yamldecode(file("config/secretmanager/${f}")) }
 
 # sa_config_files = fileset("config/serviceaccount", "*.yaml")
   # sa_objects      = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
@@ -24,6 +24,6 @@ module "project-factory" {
 
 module "secretmanager" {
   source   = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//secretmanager?ref=main"
-  for_each = local.secrets
+  for_each = local.secrets_raw
 
 }
