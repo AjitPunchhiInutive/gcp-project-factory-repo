@@ -11,8 +11,8 @@ locals {
   }
 
   sa_config_files      = fileset("config/sa", "*.yaml")
-  sa_objects           = [for f in local.sa_config_files : yamldecode(file("config/sa/${f}"))]
-  all_service_accounts = flatten([for obj in local.sa_objects : obj.service_accounts])
+  config         = [for f in local.sa_config_files : yamldecode(file("config/sa/${f}"))]
+  all_service_accounts = flatten([for obj in local.config: obj.service_accounts])
   sa_map               = { for sa in local.all_service_accounts : sa.account_id => sa if sa.deploy == true }
 
   sa_iam_bindings = {
@@ -36,8 +36,7 @@ module "project-factory" {
 
 module "serviceaccount" {
   source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//service-account?ref=main"
-  project_objects = local.project_objects
-  sa_objects      = local.sa_objects
+  config          = local.config
 }
 
 module "secretmanager" {
