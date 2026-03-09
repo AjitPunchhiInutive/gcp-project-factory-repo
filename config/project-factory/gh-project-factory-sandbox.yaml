@@ -1,4 +1,4 @@
-deploy: true
+deploy: false
 project_name: sw-dev-test-prj-tip-secrets
 billing_account: ''
 labels:
