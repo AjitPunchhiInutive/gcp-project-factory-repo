@@ -1,5 +1,5 @@
 deploy: true
-project_id: sw-dev-test-prj-itp
+project_id: sw-dev-test-prj-itp-secrets
 region: us
 # secret_manager_project_id: sw-secrets-project
 
