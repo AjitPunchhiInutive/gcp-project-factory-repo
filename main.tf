@@ -14,20 +14,8 @@ locals {
   sa_config_files = fileset("config/serviceaccount", "*.yaml")
   config_objects  = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
 
-  # ─── Build merged config — YAML values override defaults ─────────────────
-  # Passes the full config object expected by var.config
-  config = {
-    project_id                = local.config_objects[0].project_id
-    region                    = try(local.config_objects[0].region, "us-central1")
-    environment               = try(local.config_objects[0].environment, "dev")
-    secret_manager_project_id = try(local.config_objects[0].secret_manager_project_id, "")
-    key_rotation_days         = try(local.config_objects[0].key_rotation_days, 90)
-    labels                    = try(local.config_objects[0].labels, {})
-    service_accounts          = local.sa_map
-  }
-
-  # ─── FIX: var.config.service_accounts is map(object) — NO deploy field ───
-  # Iterate directly using map key (k) — no deploy filter needed
+   # ─── All service accounts from var.config ────────────────────────────────
+  # var.config.service_accounts is map(object) — no deploy field, iterate directly
   sa_map = {
     for k, sa in var.config.service_accounts : k => {
       account_id   = sa.account_id
@@ -45,15 +33,14 @@ locals {
     if sa.create_key == true
   }
 
-  # ─── SAs that do NOT need a key ──────────────────────────────────────────
+  # ─── SAs that do NOT need a key (create_key = false) ─────────────────────
   sa_without_key = {
     for k, sa in local.sa_map : k => sa
     if sa.create_key == false
   }
 
   # ─── Flatten SA + IAM roles for google_project_iam_member for_each ───────
-  # FIX: field is iam_roles (not roles) — matches variables.tf
-  # Key format: "<map_key>__<role>"
+  # Key format: "<map_key>__roles_<role_name>"
   sa_iam_bindings = {
     for pair in flatten([
       for k, sa in local.sa_map : [
