@@ -18,7 +18,7 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
       security-events: write
       actions: read
@@ -101,7 +101,7 @@ jobs:
     needs: approval
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
       actions:  read
     defaults:
@@ -171,7 +171,7 @@ jobs:
     needs: terraform-plan-after-approval
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
       actions:  read
     defaults:
