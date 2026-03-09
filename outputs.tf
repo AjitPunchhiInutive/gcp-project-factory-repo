@@ -4,3 +4,10 @@ output "project-factory" {
     value = module.project-factory
   
 }
+
+
+output "secretmanager" {
+    description = "Project "
+    value = module.secretmanager
+  
+}

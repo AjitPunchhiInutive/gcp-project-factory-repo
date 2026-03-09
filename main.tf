@@ -22,7 +22,7 @@ module "project-factory" {
 #   sa_objects      = local.sa_objects
 # }
 
-module "secret-manager" {
+module "secretmanager" {
   source   = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//secretmanager?ref=main"
   for_each = local.secrets
 
