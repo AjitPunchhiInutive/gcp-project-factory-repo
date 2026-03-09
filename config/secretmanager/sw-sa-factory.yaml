@@ -17,8 +17,7 @@ kms_key_name: null
 
 rotation_period: "2592000s"
 next_rotation_time: "2025-06-01T00:00:00Z"
-# topics:
-#   - projects/my-host-project-id/topics/secret-rotation-alerts
+topics: []
 
 ttl: null
 
@@ -27,8 +26,4 @@ versions:
     secret_data: my-db-password-value
     enabled: true
 
-iam_bindings:
-  - role: roles/secretmanager.secretAccessor
-    member: serviceAccount:sa-app-runtime@my-host-project-id.iam.gserviceaccount.com
-  - role: roles/secretmanager.secretAccessor
-    member: serviceAccount:sa-ci-deployer@my-host-project-id.iam.gserviceaccount.com
+iam_bindings: []
