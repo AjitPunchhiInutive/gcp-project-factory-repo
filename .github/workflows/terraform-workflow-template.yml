@@ -11,6 +11,7 @@ env:
   TF_VERSION: "1.6.3"
   WORKING_DIR: "."
   TFSEC_VERSION: "1.28.6"
+  TFLINT_VERSION: "0.50.3"
 
 jobs:
   terraform-plan:
@@ -45,39 +46,23 @@ jobs:
           project_id:  ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
-      
-    #   - name: Install tfsec
-    #     run: |
-    #       wget -q https://github.com/aquasecurity/tfsec/releases/download/v${{ env.TFSEC_VERSION }}/tfsec-linux-amd64 -O tfsec
-    #       chmod +x tfsec
-    #       sudo mv tfsec /usr/local/bin/tfsec
-    #       tfsec --version
 
-    #   - name: Run tfsec scan
-    #     run: |
-    #       echo "scanning directory: $(pwd)"
-    #       tfsec . --soft-fail
-    #       echo "tfsec scan complete"
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
       
-    #   - name: Save tfsec SARIF report
-    #     if: always()
-    #     run: |
-    #       tfsec . --format sarif --soft-fail > tfsec.sarif || true
-          
-    #   - name: Upload tfsec results to GitHub Security tab
-    #     uses: github/codeql-action/upload-sarif@v3
-    #     if: always()
-    #     with:
-    #       sarif_file: tfsec.sarif
+      - name: Install tflint
+        run: |
+          wget -q https://github.com/terraform-linters/tflint/releases/download/v${{ env.TFLINT_VERSION }}/tflint_linux_amd64.zip -O tflint.zip
+          unzip -q tflint.zip
+          sudo mv tflint /usr/local/bin/tflint
+          tflint --version
 
-    #   - name: Save tfsec report as artifact
-    #     uses: actions/upload-artifact@v4
-    #     if: always()
-    #     with:
-    #       name: tfsec-report
-    #       path: tfsec.sarif
-    #       retention-days: 30
-      
+      - name: Init tflint
+        run: tflint --init
+
+      - name: Run tflint
+        run: tflint --recursive
+
       - name: Terraform Init
         run: terraform init
 
@@ -92,7 +77,7 @@ jobs:
         with:
           name: tfplan
           path: ${{ env.WORKING_DIR }}/tfplan
-          retention-days:    1
+          retention-days: 1
 
   approval:
     needs: terraform-plan
@@ -143,13 +128,28 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account:            ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
 
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Install tflint
+        run: |
+          wget -q https://github.com/terraform-linters/tflint/releases/download/v${{ env.TFLINT_VERSION }}/tflint_linux_amd64.zip -O tflint.zip
+          unzip -q tflint.zip
+          sudo mv tflint /usr/local/bin/tflint
+          tflint --version
+
+      - name: Init tflint
+        run: tflint --init
+
+      - name: Run tflint
+        run: tflint --recursive
+
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
 
-      # Fresh plan after approval — this is the plan that will be applied
       - name: Terraform Plan
         run: terraform plan -var-file=gcp-project-factory-repo.tfvars -out=tfplan
 
@@ -200,7 +200,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      # Download the fresh plan generated after approval
       - name: Download Plan Artifact
         uses: actions/download-artifact@v4
         with:

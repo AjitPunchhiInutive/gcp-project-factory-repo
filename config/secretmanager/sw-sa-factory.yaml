@@ -1,28 +1,34 @@
 deploy: true
+secret_id: service-account-key
 project_id: sw-dev-test-prj-itp-secrets
-region: us
-# secret_manager_project_id: sw-secrets-project
 
-service_accounts:
+labels:
+  environment: dev
+  team: backend
+  app: my-app
 
-  # ── Platform / Infrastructure ─────────────────────────────────────────────
-  - account_id: sa-terraform-runner-demo
-    display_name: Terraform Runner SA
-    description: Runs Terraform plans and applies in CI/CD automation
-    deploy: true
-    roles:
-      - roles/editor
-      - roles/iam.securityAdmin
-      - roles/resourcemanager.projectIamAdmin
-    secret_id: terraform-runner-sa-key
+annotations:
+  description: Servic account key
+  owner: backend-team
 
-  - account_id: sa-ci-deployer
-    display_name: CI Deployer SA
-    description: Used by CI pipeline to deploy Cloud Run and GCS resources
-    deploy: true
-    roles:
-      - roles/run.admin
-      - roles/storage.objectAdmin
-      - roles/iam.serviceAccountUser
-      - roles/artifactregistry.writer
-    secret_id: ci-deployer-sa-key
+replication_type: auto
+replication_locations: []
+kms_key_name: null
+
+rotation_period: "2592000s"
+next_rotation_time: "2025-06-01T00:00:00Z"
+# topics:
+#   - projects/my-host-project-id/topics/secret-rotation-alerts
+
+ttl: null
+
+versions:
+  v1:
+    secret_data: my-db-password-value
+    enabled: true
+
+iam_bindings:
+  - role: roles/secretmanager.secretAccessor
+    member: serviceAccount:sa-app-runtime@my-host-project-id.iam.gserviceaccount.com
+  - role: roles/secretmanager.secretAccessor
+    member: serviceAccount:sa-ci-deployer@my-host-project-id.iam.gserviceaccount.com
