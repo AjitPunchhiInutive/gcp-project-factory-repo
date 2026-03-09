@@ -13,7 +13,7 @@ locals {
   sa_config_files      = fileset("config/serviceaccount", "*.yaml")
   config         = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
   all_service_accounts = flatten([for obj in local.config: obj.service_accounts])
-  sa_map = { for k, sa in var.config.service_accounts : k => sa }
+  sa_map = { for k, sa in local.config.service_accounts : k => sa }
 
 
 }
