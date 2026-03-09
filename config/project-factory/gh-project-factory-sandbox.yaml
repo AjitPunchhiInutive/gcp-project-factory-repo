@@ -1,4 +1,4 @@
-deploy: true
+deploy: false
 project_name: sw-dev-test-prj-tip-secrets
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
@@ -7,7 +7,7 @@ labels:
   environment: dev
   application: udp
   primary_owner: ajit-punchhi
-deletion_policy: PREVENT
+deletion_policy: DELETE
 auto_create_network: false
 parent: folders/530179965844
 services:
