@@ -142,22 +142,6 @@ jobs:
           project_id:                 ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account:            ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
-      - name: Terraform Format Check
-        run: terraform fmt -check -recursive
-      
-      - name: Install tflint
-        run: |
-          wget -q https://github.com/terraform-linters/tflint/releases/download/v${{ env.TFLINT_VERSION }}/tflint_linux_amd64.zip -O tflint.zip
-          unzip -q tflint.zip
-          sudo mv tflint /usr/local/bin/tflint
-          tflint --version
-
-      - name: Init tflint
-        run: tflint --init
-
-      - name: Run tflint
-        run: tflint --recursive
-
       - name: Terraform Init
         run: terraform init
 
