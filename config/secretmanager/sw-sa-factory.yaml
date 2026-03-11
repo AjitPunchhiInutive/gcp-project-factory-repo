@@ -22,7 +22,7 @@ ttl: null
 
 versions:
   v1:
-    secret_data: ""
-    enabled: false
+    secret_data: test demo
+    enabled: true
 
 iam_bindings: []
