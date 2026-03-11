@@ -1,4 +1,4 @@
-deploy: false
+deploy: true
 secret_id: rds-secrets
 project_id: sw-dev-test-prj-itp-secrets
 
@@ -23,6 +23,6 @@ ttl: null
 versions:
   v1:
     secret_data: ""
-    enabled: true
+    enabled: false
 
 iam_bindings: []
