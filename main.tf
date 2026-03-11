@@ -1,10 +1,8 @@
 locals {
 
-  # ─── Project Factory ──────────────────────────────────────────────────────
   project_config_files = fileset("config/project-factory", "*.yaml")
   project_objects      = [for f in local.project_config_files : yamldecode(file("config/project-factory/${f}"))]
-
-  # ─── Secret Manager ───────────────────────────────────────────────────────
+  
   secret_config_files = fileset("config/secretmanager", "*.yaml")
   secrets = {
     for f in local.secret_config_files :
@@ -12,33 +10,13 @@ locals {
     if yamldecode(file("config/secretmanager/${f}")).deploy == true
   }
 
-  # ─── Service Accounts ─────────────────────────────────────────────────────
-  sa_config_files = fileset("config/serviceaccount", "*.yaml")
+  config = yamldecode(file("config/serviceaccount/${one(fileset("config/serviceaccount", "*.yaml"))}"))
 
-  # Decode all YAML files into a list
-  sa_config_list = [for f in local.sa_config_files : yamldecode(file("config/serviceaccount/${f}"))]
+  sa_map = local.config.service_accounts
 
-  # FIX: Extract the single object from the list using [0]
-  # Module var.config expects object — NOT a tuple/list
-  config = local.sa_config_list[0]
+  sa_with_key    = { for k, sa in local.sa_map : k => sa if sa.create_key == true }
+  sa_without_key = { for k, sa in local.sa_map : k => sa if sa.create_key == false }
 
-  # FIX: Iterate local.config.service_accounts — not var.config
-  sa_map = {
-    for k, sa in local.config.service_accounts : k => sa
-  }
-
-  # ─── Split by create_key ──────────────────────────────────────────────────
-  sa_with_key = {
-    for k, sa in local.sa_map : k => sa
-    if sa.create_key == true
-  }
-
-  sa_without_key = {
-    for k, sa in local.sa_map : k => sa
-    if sa.create_key == false
-  }
-
-  # ─── Flatten SA + IAM roles for IAM binding for_each ─────────────────────
   sa_iam_bindings = {
     for pair in flatten([
       for k, sa in local.sa_map : [
@@ -52,7 +30,6 @@ locals {
     ]) : pair.key => pair
   }
 }
-
 
 module "project-factory" {
   source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//project-factory?ref=main"
