@@ -50,10 +50,10 @@ module "project-factory" {
   project_objects = local.project_objects
 }
 
-# module "serviceaccount" {
-#   source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//service-account?ref=main"
-#   config          = local.config
-# }
+module "serviceaccount" {
+  source          = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//service-account?ref=main"
+  config          = local.config
+}
 
 module "secretmanager" {
   source  = "git@github.com:AjitPunchhiInutive/-sw-prod-udp-rds-infra-modules.git//secretmanager?ref=main"
