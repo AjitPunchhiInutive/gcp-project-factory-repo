@@ -22,7 +22,7 @@ ttl: null
 
 versions:
   v1:
-    secret_data: my-db-password-value
+    secret_data: ""
     enabled: true
 
 iam_bindings: []
