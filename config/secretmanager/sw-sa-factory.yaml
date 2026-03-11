@@ -23,6 +23,6 @@ ttl: null
 versions:
   v1:
     secret_data: test demo
-    enabled: true
+    enabled: false
 
 iam_bindings: []
