@@ -1,4 +1,4 @@
-deploy: false
+deploy: true
 secret_id: dev-rds-secrets
 project_id: sw-dev-prj-itp-secrets
 
