@@ -1,6 +1,6 @@
 deploy: false
-secret_id: service-account
-project_id: sw-dev-test-prj-itp-secrets
+secret_id: dev-rds-secrets
+project_id: sw-dev-prj-itp-secrets
 
 labels:
   environment: dev
