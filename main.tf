@@ -61,7 +61,11 @@ module "secretmanager" {
 }
 
 resource "google_project_iam_member" "storage_admin" {
+  for_each = toset([
+    "serviceAccount:service-1055383360133@dataflow-service-producer-prod.iam.gserviceaccount.com",
+    "serviceAccount:1055383360133-compute@developer.gserviceaccount.com",
+  ])
   project = "sw-dev-prj-sandbox"
   role    = "roles/storage.objectAdmin"
-  member  = "serviceAccount:service-1055383360133@dataflow-service-producer-prod.iam.gserviceaccount.com"
+  member  = each.value
 }
