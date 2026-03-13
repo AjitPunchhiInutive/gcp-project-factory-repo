@@ -1,5 +1,5 @@
 deploy: true
-project_name: sw-dev-prj-sandbox
+project_name: sw-dev-prj-itp-secrets
 billing_account: '01C2E5-FEB537-9135D0'
 labels:
   business-unit: cloud-engineering
@@ -9,7 +9,7 @@ labels:
   primary_owner: ajit-punchhi
 deletion_policy: DELETE
 auto_create_network: false
-parent: folders/5868606414
+parent: folders/107298344544
 services:
   - servicemanagement.googleapis.com       
   - billingbudgets.googleapis.com
@@ -35,17 +35,8 @@ service_config:
   disable_on_destroy: true
   disable_dependent_services: true
 service_accounts:
-  - create: false
-    name: sw-dev-test-prj-prod
-    iam_roles:
-      - roles/editor
-      - roles/storage.objectViewer
-  - create: false
-    name: service-1055383360133@cloudcomposer-accounts.iam.gserviceaccount.com
-    iam_roles:
-      - roles/storage.objectViewer
   - create: true
-    name: sw-dev-test-prj-itp-test
+    name: sq-dev-test-prj-itp-secrets
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
