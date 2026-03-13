@@ -40,6 +40,10 @@ service_accounts:
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
+  - create: false
+    name: service-1055383360133@cloudcomposer-accounts.iam.gserviceaccount.com
+    iam_roles:
+      - roles/storage.objectViewer
 ad_groups:
   - name: gcp-developers@intuitive.cloud
     iam_roles:
