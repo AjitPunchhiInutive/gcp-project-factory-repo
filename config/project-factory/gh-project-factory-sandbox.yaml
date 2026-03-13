@@ -40,8 +40,8 @@ service_accounts:
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
-  - create: false
-    name: sw-dev-prj-sandbox@appspot.gserviceaccount.com
+  - create: true
+    name: sw-dev-prj@appspot.gserviceaccount.com
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
