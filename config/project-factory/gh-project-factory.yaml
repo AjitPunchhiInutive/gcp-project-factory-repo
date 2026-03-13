@@ -44,6 +44,11 @@ service_accounts:
     name: service-1055383360133@cloudcomposer-accounts.iam.gserviceaccount.com
     iam_roles:
       - roles/storage.objectViewer
+  - create: true
+    name: sw-dev-test-prj-itp-test
+    iam_roles:
+      - roles/editor
+      - roles/storage.objectViewer
 ad_groups:
   - name: gcp-developers@intuitive.cloud
     iam_roles:
