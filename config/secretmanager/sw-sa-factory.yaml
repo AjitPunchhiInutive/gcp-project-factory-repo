@@ -5,17 +5,23 @@ labels:
   environment: dev
   team: backend
   app: my-app
+
 annotations:
   description: Servic account key
   owner: backend-team
+
 replication_type: auto
 replication_locations: []
 kms_key_name: null
+
 rotation_period: "2592000s"
 next_rotation_time: "2025-06-01T00:00:00Z"
+
 ttl: null
+
 versions:
   v1:
-    secret_data: null
+    secret_data: test demo
     enabled: false
+
 iam_bindings: []
