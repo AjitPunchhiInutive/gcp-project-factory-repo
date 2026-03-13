@@ -40,11 +40,6 @@ service_accounts:
     iam_roles:
       - roles/editor
       - roles/storage.objectViewer
-  - create: true
-    name: sw-dev-prj@appspot.gserviceaccount.com
-    iam_roles:
-      - roles/editor
-      - roles/storage.objectViewer
 ad_groups:
   - name: gcp-developers@intuitive.cloud
     iam_roles:

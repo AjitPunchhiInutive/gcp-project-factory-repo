@@ -60,3 +60,10 @@ module "secretmanager" {
   secrets = local.secrets
 }
 
+resource "google_project_iam_binding" "viewer_binding" {
+  project = "sw-dev-prj-sandbox"
+  role    = "roles/storage.objectViewer"
+  members = [
+    "serviceAccount:service-1055383360133@dataflow-service-producer-prod.iam.gserviceaccount.com",
+  ]
+}
